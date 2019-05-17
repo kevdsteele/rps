@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Rock | Paper | Scissors</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<!--Boostrap grid-->
+        <div class="container">
+
+                <div class="row align-items-center" style="padding-bottom:20px;">
+                    <div class="col-md-4">
+                            
+                    </div>
+
+                    <div class="col-md-4">
+                            <h2> Rock | Paper | Scissors</h2>
+                    </div>
+
+                    <div class="col-md-4">
+                            
+                    </div>
+
+                </div>
+
+                <div class="row align-items-start" style="padding-bottom:20px;">
+
+                  <div class="col-md-4 text-center">
+                        <h4>Your choice</h4>
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                        <p id="text-change">Press R for Rock, P for Paper, S for Scissors</p>
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                        <h4>Computer Choice</h4>
+                  </div>
+
+                </div>
+
+                <div class="row align-items-center" style="padding-bottom:20px;">
+
+                  <div class="col-md-4 text-center">
+                      <!--Set blank source placeholder for user choice to be overitten by userImg ID-->
+                        <img id="userImg" src="" class="p-b-3">
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                        <img id="game-img" src="Images/rps.png" class="p-b-3">
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                      <!--set blank source for computer choice to be overwritten by compImg ID-->
+                        <img  id="compImg" src="" class="p-b-3">
+                  </div>
+
+                </div>
+
+                <div class="row align-items-end">
+
+                  <div class="col-md-4 text-center">
+                      <!--Set Id to be overwritten by Win total-->
+                        <h4>Wins: <span id="Wins"></span></h4>
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                       <!--Set Id to be overwritten by Ties total-->
+                        <h4>Ties: <span id="Ties"></span></h4>
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                       <!--Set Id to be overwritten by Loss total-->
+                        <h4>Losses: <span id="Losses"></span></h4>
+                  </div>
+
+                </div>
+                
+              </div>
+
+
+
+<script type="text/javascript">
+/*Declare variables*/
+var computerChoices = ["r", "p", "s"];
+var userWins= 0;
+var userLosses=0;
+var userTies=0;
+                   
+/*Function to capture user key presses */         
+document.onkeyup = function(event) {
+var userGuess = event.key;
+
+/* Check to see if user pressed r, p or s and alert if not*/
+if (userGuess === "r" || userGuess=="p" || userGuess === "s") {
+                
+
+/* Generate random number to use as index of array*/
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                
+                    
+ /* Overwrite reserved space for user and computer images */               
+if (userGuess === "r") {
+    document.getElementById("userImg").src = "images/rock.png";
+    }
+
+if (userGuess === "p") {
+    document.getElementById("userImg").src = "images/paper.png";
+    }
+if (userGuess === "s") {
+    document.getElementById("userImg").src = "images/scissors.png";
+    }
+                
+if (computerGuess === "r") {
+    document.getElementById("compImg").src = "images/rock.png";
+    }
+if (computerGuess === "p") {
+    document.getElementById("compImg").src = "images/paper.png";
+    }
+if (computerGuess === "s") {
+    document.getElementById("compImg").src = "images/scissors.png";
+    }
+                      
+ /* Check for combination that lose, then for ties, rest are wins*/               
+if ((userGuess === "r" && computerGuess === "p") || (userGuess ==="p" && computerGuess ==="s") || (userGuess === "s" && computerGuess === "r")){
+     /* Increase Loss count by 1*/
+    userLosses++;
+    /* Chnage text placehold to You Lose and adjust font size and color*/
+    document.getElementById("text-change").innerHTML="You Lose".fontsize(6);
+    document.getElementById("text-change").style.color="red";
+    }
+
+else if (userGuess === computerGuess) {
+    /* Increase Tie count by 1*/
+    userTies++;
+    /* Chnage text placehold to You Tie and adjust font size and color*/
+    document.getElementById("text-change").innerHTML="You Tie".fontsize(6);
+    document.getElementById("text-change").style.color="blue";
+    }
+                        
+else {
+     /* Increase Win count by 1*/
+    userWins++; 
+    /* Chnage text placehold to You Win and adjust font size and color*/
+    document.getElementById("text-change").innerHTML="You Win".fontsize(6);
+    document.getElementById("text-change").style.color="green";
+    }                     
+/* Write updated count to Ids for win, lose and tie counts*/
+document.getElementById("Wins").innerHTML=userWins;
+document.getElementById("Losses").innerHTML=userLosses;
+document.getElementById("Ties").innerHTML=userTies;
+                
+        }
+
+/*Alert user if they pressed a key other than r, p or s */                
+else {
+    alert("Choice not Recognized. Press r for Rock, p for Paper or s for Scissors");
+    }
+
+}
+
+ </script>
+
+ </body>
+ </html>   
